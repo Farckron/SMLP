@@ -1,0 +1,25 @@
+2025-08-30 00:52:27,146 [INFO] terminal: exec: c:\Users\spart\AppData\Local\Programs\Python\Python312\python.exe C:\s\VSprojects\SMLP\SMLP\photosearch.py index --root photos/photosF --index data\photosF.faiss --meta data\photosF.pkl
+2025-08-30 00:52:30,142 [INFO] photosearch: Loading faiss with AVX2 support.
+2025-08-30 00:52:30,202 [INFO] photosearch: Successfully loaded faiss with AVX2 support.
+2025-08-30 00:52:33,559 [INFO] photosearch: running on device=cpu
+2025-08-30 00:52:33,562 [INFO] photosearch: Parsing model identifier. Schema: None, Identifier: ViT-B-32-quickgelu
+2025-08-30 00:52:33,562 [INFO] photosearch: Loaded built-in ViT-B-32-quickgelu model config.
+2025-08-30 00:52:34,084 [INFO] photosearch: Instantiating model architecture: CLIP
+2025-08-30 00:52:35,113 [INFO] photosearch: Loading full pretrained weights from: C:\Users\spart\.cache\huggingface\hub\models--timm--vit_base_patch32_clip_224.openai\snapshots\a6f597a30f7b82c51704746581f9a4e41421e878\open_clip_model.safetensors
+2025-08-30 00:52:35,948 [INFO] photosearch: Final image preprocessing configuration set: {'size': (224, 224), 'mode': 'RGB', 'mean': (0.48145466, 0.4578275, 0.40821073), 'std': (0.26862954, 0.26130258, 0.27577711), 'interpolation': 'bicubic', 'resize_mode': 'shortest', 'fill_color': 0}
+2025-08-30 00:52:35,948 [INFO] photosearch: Model ViT-B-32-quickgelu creation process complete.
+2025-08-30 00:52:35,952 [INFO] photosearch: Parsing tokenizer identifier. Schema: None, Identifier: ViT-B-32-quickgelu
+2025-08-30 00:52:35,952 [INFO] photosearch: Attempting to load config from built-in: ViT-B-32-quickgelu
+2025-08-30 00:52:35,953 [INFO] photosearch: Using default SimpleTokenizer.
+2025-08-30 00:52:36,044 [INFO] photosearch: found 107 images under photos/photosF
+2025-08-30 00:55:16,787 [INFO] terminal: exec: c:\Users\spart\AppData\Local\Programs\Python\Python312\python.exe C:\s\VSprojects\SMLP\SMLP\style_grouper.py --root photos/photosF --out photosFout --clusters -1 --save-rest True
+INFO:faiss.loader:Loading faiss with AVX2 support.
+INFO:faiss.loader:Successfully loaded faiss with AVX2 support.
+INFO:root:Parsing model identifier. Schema: None, Identifier: ViT-B-32-quickgelu
+INFO:root:Loaded built-in ViT-B-32-quickgelu model config.
+INFO:root:Instantiating model architecture: CLIP
+INFO:root:Loading full pretrained weights from: C:\Users\spart\.cache\huggingface\hub\models--timm--vit_base_patch32_clip_224.openai\snapshots\a6f597a30f7b82c51704746581f9a4e41421e878\open_clip_model.safetensors
+INFO:root:Final image preprocessing configuration set: {'size': (224, 224), 'mode': 'RGB', 'mean': (0.48145466, 0.4578275, 0.40821073), 'std': (0.26862954, 0.26130258, 0.27577711), 'interpolation': 'bicubic', 'resize_mode': 'shortest', 'fill_color': 0}
+INFO:root:Model ViT-B-32-quickgelu creation process complete.
+INFO:style_grouper:auto-k selected 25 (silhouette=0.230)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"

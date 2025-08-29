@@ -114,7 +114,7 @@ def embed_images(paths: List[Path], batch: int = 32) -> np.ndarray:
     return np.concatenate(vecs) if vecs else np.zeros((0, 512), dtype="float32")
 
 # ─── auto-k selection ───────────────────────────────────────────────────────
-def auto_k(feats: np.ndarray, k_max: int = 25) -> int:
+def auto_k(feats: np.ndarray, k_max: int = 30) -> int:
     """Estimate optimal k via silhouette score.
 
     ``range(2, k_max)`` previously skipped ``k_max`` and the default ceiling was
