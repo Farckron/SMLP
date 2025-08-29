@@ -1,0 +1,11 @@
+torch
+faiss-gpu
+open-clip-torch
+numpy
+Pillow
+tqdm
+scikit-learn
+scipy
+python-dotenv
+openai
+PyQt5
