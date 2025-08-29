@@ -23,3 +23,14 @@ INFO:root:Final image preprocessing configuration set: {'size': (224, 224), 'mod
 INFO:root:Model ViT-B-32-quickgelu creation process complete.
 INFO:style_grouper:auto-k selected 25 (silhouette=0.230)
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-30 01:01:32,218 [INFO] terminal: exec: c:\Users\spart\AppData\Local\Programs\Python\Python312\python.exe C:\s\VSprojects\SMLP\SMLP\style_grouper.py --root photos/photosF --out photosFout --clusters -1 --save-rest True
+INFO:faiss.loader:Loading faiss with AVX2 support.
+INFO:faiss.loader:Successfully loaded faiss with AVX2 support.
+INFO:root:Parsing model identifier. Schema: None, Identifier: ViT-B-32-quickgelu
+INFO:root:Loaded built-in ViT-B-32-quickgelu model config.
+INFO:root:Instantiating model architecture: CLIP
+INFO:root:Loading full pretrained weights from: C:\Users\spart\.cache\huggingface\hub\models--timm--vit_base_patch32_clip_224.openai\snapshots\a6f597a30f7b82c51704746581f9a4e41421e878\open_clip_model.safetensors
+INFO:root:Final image preprocessing configuration set: {'size': (224, 224), 'mode': 'RGB', 'mean': (0.48145466, 0.4578275, 0.40821073), 'std': (0.26862954, 0.26130258, 0.27577711), 'interpolation': 'bicubic', 'resize_mode': 'shortest', 'fill_color': 0}
+INFO:root:Model ViT-B-32-quickgelu creation process complete.
+INFO:style_grouper:auto-k selected 29 (silhouette=0.251)
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"

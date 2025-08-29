@@ -125,6 +125,8 @@ def auto_k(feats: np.ndarray, k_max: int = 30) -> int:
     if len(feats) < 2:
         return 1
     k_max = min(k_max, len(feats) - 1)
+    if k_max < 2:
+        return 1
     best_k, best_s = 2, -1.0
     for k in range(2, k_max + 1):
         km = MiniBatchKMeans(
