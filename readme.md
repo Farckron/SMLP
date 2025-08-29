@@ -4,9 +4,9 @@
 |---------|------------------|
 | **GPU-first** | Uses CUDA automatically when available. Falls back to CPU. |
 | **FAISS + CLIP** | Fast cosine-similarity search on ViT-B-32-QuickGELU embeddings. |
-| **Auto k-clustering** | Pass `--clusters -1` to let the app pick an optimal number via silhouette analysis. |
+| **Auto k-clustering** | Pass `--clusters -1` to let the app pick an optimal number via silhouette analysis (tests more `k` for finer groups). |
 | **GPT-4o-mini summaries** | Each cluster is described in ≤60 tokens JSON (includes `[param_weights]`). |
-| **/group best/others layout** | Per-cluster `preset.json`, best photo renamed `CHOOSEN_*`, `data.csv` with scores. |
+| **/group best/others layout** | Per-cluster `preset.json`, best photo renamed `CHOOSEN_*`, `data.csv` with scores (uses centroid + sharpness + brightness). |
 | **Rotating logs** | `data/log.txt` rolls at 5 MB → `log.1.txt`, `log.2.txt`… |
 
 ## Quick Start

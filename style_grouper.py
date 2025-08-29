@@ -114,14 +114,25 @@ def embed_images(paths: List[Path], batch: int = 32) -> np.ndarray:
     return np.concatenate(vecs) if vecs else np.zeros((0, 512), dtype="float32")
 
 # ─── auto-k selection ───────────────────────────────────────────────────────
-def auto_k(feats: np.ndarray, k_max: int = 12) -> int:
-    """Estimate optimal k via silhouette score."""
+def auto_k(feats: np.ndarray, k_max: int = 25) -> int:
+    """Estimate optimal k via silhouette score.
+
+    ``range(2, k_max)`` previously skipped ``k_max`` and the default ceiling was
+    fairly low which often under‑clustered datasets.  The updated version sweeps
+    up to and including ``k_max`` (capped by the sample size) so more candidate
+    cluster counts are considered.
+    """
+    if len(feats) < 2:
+        return 1
+    k_max = min(k_max, len(feats) - 1)
     best_k, best_s = 2, -1.0
-    for k in range(2, min(k_max, len(feats))):
+    for k in range(2, k_max + 1):
         km = MiniBatchKMeans(
             n_clusters=k, random_state=0, batch_size=256, n_init="auto"
         )
         lbls = km.fit_predict(feats)
+        if len(set(lbls)) < 2:
+            continue
         s = silhouette_score(feats, lbls)
         if s > best_s:
             best_k, best_s = k, s
@@ -175,7 +186,9 @@ def curate(args):
         others_root.mkdir(exist_ok=True)
 
     for cid in range(k):
-        c_paths = [p for p, l in zip(paths, labels) if l == cid]
+        idxs = np.where(labels == cid)[0]
+        c_paths = [paths[i] for i in idxs]
+        c_feats = feats[idxs]
         br_vals, sh_vals = [], []
         for p in c_paths:
             arr = _arr_gray(_open_rgb(p))
@@ -188,8 +201,14 @@ def curate(args):
         }
         smry = gpt_summary([p.stem for p in c_paths], stats)
 
-        # score and pick best
-        scores = [0.3 * br + 0.7 * sh for br, sh in zip(br_vals, sh_vals)]
+        # score and pick best (centroid proximity + sharpness + brightness)
+        centroid = km.cluster_centers_[cid]
+        dist = np.linalg.norm(c_feats - centroid, axis=1)
+        dist_norm = 1 - (dist - dist.min()) / (dist.ptp() + 1e-8)
+        sh_arr = np.array(sh_vals)
+        sh_norm = (sh_arr - sh_arr.min()) / (sh_arr.ptp() + 1e-8)
+        br_arr = np.array(br_vals)
+        scores = 0.5 * dist_norm + 0.3 * sh_norm + 0.2 * br_arr
         best_idx = int(np.argmax(scores))
         best_p = c_paths[best_idx]
 
