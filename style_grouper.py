@@ -204,9 +204,9 @@ def curate(args):
         # score and pick best (centroid proximity + sharpness + brightness)
         centroid = km.cluster_centers_[cid]
         dist = np.linalg.norm(c_feats - centroid, axis=1)
-        dist_norm = 1 - (dist - dist.min()) / (dist.ptp() + 1e-8)
+        dist_norm = 1 - (dist - dist.min()) / (np.ptp(dist) + 1e-8)
         sh_arr = np.array(sh_vals)
-        sh_norm = (sh_arr - sh_arr.min()) / (sh_arr.ptp() + 1e-8)
+        sh_norm = (sh_arr - sh_arr.min()) / (np.ptp(sh_arr) + 1e-8)
         br_arr = np.array(br_vals)
         scores = 0.5 * dist_norm + 0.3 * sh_norm + 0.2 * br_arr
         best_idx = int(np.argmax(scores))
